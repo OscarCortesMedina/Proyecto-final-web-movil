@@ -1,0 +1,25 @@
+<ion-header >
+  <ion-toolbar >
+    <ion-title  style="color: #fff!important;">Dermo App</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-header  >
+    <ion-toolbar >
+      <ion-title style="padding-inline:0px;text-align: center;font-size:x-large;" >
+        Escoger parte del cuerpo
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-button expand="block" (click)="rotar()" >Rotar</ion-button>
+  <div class="container">
+    <img [src]="cuerpo"/>
+    <button class="btn" (click)="rotar()" >Cabeza</button>
+  </div>
+  
+
+</ion-content>
