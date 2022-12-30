@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
@@ -10,7 +10,7 @@ import { AppService } from 'src/app/config/app.service';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class LoginPage  {
 
   credentials: FormGroup;
   isPhone = environment.phone;
@@ -28,14 +28,11 @@ export class LoginPage implements OnInit {
 		this.isPhone=this.appService.isPhone;
   }
 
-	ngOnInit() {
-		
-	}
 
 	async login() {
 		const loading = await this.loadingController.create();
-		await loading.present();
-
+		//await loading.present();
+		this.router.navigateByUrl('/inicio', { replaceUrl: true });
 		/*this.authService.login(this.credentials.value).subscribe(
 			async (res) => {
 				await loading.dismiss();

@@ -32,7 +32,7 @@ export class AppComponent implements OnInit{
   ngOnInit() {
     this.navEnd.subscribe(evt => {
       console.log(evt);
-      this.showMenu= evt.url!=='/login';
+      this.showMenu= evt.url!=='/login' && evt.url!=='/registro' && evt.url!=='/registro-medico';
     });
   }
 
@@ -42,14 +42,15 @@ export class AppComponent implements OnInit{
     if(this.isPhone){
       this.appPages = [
         { title: 'Inicio', url: '/inicio', icon: 'home' },
-        { title: 'Consultas', url: '/folder/Outbox', icon: 'medkit' },
-        { title: 'Notificaciones', url: '/folder/Outbox', icon: 'notifications' },
+        { title: 'Consultas', url: '/consultas', icon: 'medkit' },
+        { title: 'Notificaciones', url: '/notificaciones', icon: 'notifications' },
       ];
     }else {
       this.appPages = [
         { title: 'Inicio', url: '/inicio', icon: 'home' },
-        { title: 'Casos Médicos', url: '/folder/Outbox', icon: 'clipboard' },
-        { title: 'Reportes', url: '/folder/Outbox', icon: 'document' },
+        { title: 'Casos Médicos', url: '/casos-medicos', icon: 'clipboard' },
+        { title: 'Historias clinicas', url: '/historias-clinicas', icon: 'medical' },
+        { title: 'Reportes', url: '/reportes', icon: 'bar-chart' },
       ];
 
     }
@@ -61,7 +62,12 @@ export class AppComponent implements OnInit{
       inputs: [
         {
           type: 'radio',
-          label: 'Español',
+          label: 'Español (Colombia)',
+          value: 'xs'
+        },
+        {
+          type: 'radio',
+          label: 'Español (Mexico)',
           value: 'xs'
         },
         {

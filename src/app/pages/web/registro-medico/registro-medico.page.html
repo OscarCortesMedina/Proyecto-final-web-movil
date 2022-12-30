@@ -1,0 +1,65 @@
+<ion-content padding>
+  <div class="spacer" style="width:300px;height:96px;" id="login-spacer1"></div>
+  <h1 id="login-heading7" style="color:#FFF;text-align:center;">
+    Editar información personal 
+  </h1>
+  <div class="web-registro">
+	<form (ngSubmit)="registrarse()" [formGroup]="registro">
+		<div class="input-group">
+			<ion-item>
+        <ion-label>Nombre</ion-label>
+				<ion-input type="text" placeholder="Nombre" formControlName="nombre"></ion-input>
+			</ion-item>
+      <ion-item>
+        <ion-label>Correo</ion-label>
+				<ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
+			</ion-item>
+      <ion-item>
+        <ion-label>Nacionalidad</ion-label>
+        <ion-item>
+          <ion-select value="Colombia" placeholder="Seleccione nacionalidad" style="width: 100%;">
+            <ion-select-option value="Colombia">Colombia</ion-select-option>
+            <ion-select-option value="oranges">Oranges</ion-select-option>
+            <ion-select-option value="bananas">Bananas</ion-select-option>
+          </ion-select>
+        </ion-item>
+			</ion-item>
+      <ion-item>
+        <ion-label>Especialidad</ion-label>
+        <ion-item>
+          <ion-select value="Dermatologo" placeholder="Seleccione especialidad" style="width: 100%;">
+            <ion-select-option value="Dermatologo">Dermatologo</ion-select-option>
+            <ion-select-option value="oranges">Oranges</ion-select-option>
+            <ion-select-option value="bananas">Bananas</ion-select-option>
+          </ion-select>
+        </ion-item>
+			</ion-item>
+      <ion-item>
+        <ion-button type="submit" expand="block" >
+          Agregar soporte medico
+        </ion-button>
+      </ion-item>
+			<ion-item>
+        <ion-label>Contraseña</ion-label>
+				<ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
+			</ion-item>
+      <ion-item>
+        <ion-label>Confirmar Contraseña</ion-label>
+				<ion-input type="password" placeholder="Password" formControlName="passwordConfirmation"></ion-input>
+			</ion-item>
+
+		</div>
+    <div class="spacer" style="width:300px;height:96px;" id="login-spacer1"></div>
+
+    <div class="center" style="text-align: center;">
+      <ion-button type="submit" expand="block"[routerLink]="'/login'" >
+        Registrarse
+      </ion-button>
+      <div class="spacer" style="width:300px;height:10px;" id="login-spacer1"></div>
+  
+  
+    </div>
+	</form>
+</div>
+</ion-content>
+

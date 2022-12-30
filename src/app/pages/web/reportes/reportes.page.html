@@ -1,0 +1,47 @@
+<ion-header >
+  <ion-toolbar >
+    <ion-title  style="color: #fff!important;">Reportes</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="web-view">
+    <div class="input-group">
+      <div>
+        <ion-item>
+          <ion-label class="question-label">Filtrar por paciente</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-select value="" placeholder="Seleccione paciente" style="width: 100%;">
+            <ion-select-option value="Paciente1">Paciente1</ion-select-option>
+            <ion-select-option value="oranges">Oranges</ion-select-option>
+            <ion-select-option value="bananas">Bananas</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label class="question-label">Filtrar por fecha</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label class="question-label">Desde</ion-label>
+          <ion-input value="xx/xx/xxx">
+          </ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label class="question-label">Hasta</ion-label>
+          <ion-input value="xx/xx/xxx">
+          </ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-button slot="end">Generar reporte</ion-button>
+        </ion-item>
+      </div>
+    </div>
+
+
+  </div>
+
+</ion-content>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ApplicationConfig } from '@angular/platform-browser';
+import { AppService } from 'src/app/config/app.service';
 
 @Component({
   selector: 'app-detalle-consulta',
@@ -7,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetalleConsultaPage implements OnInit {
 
-  constructor() { }
+  isPhone = false;
+  diagnostico =false;
+  constructor(private appService:AppService) {
+    this.isPhone = this.appService.isPhone;
+   }
 
   ngOnInit() {
   }

@@ -66,11 +66,11 @@
         </ion-item>
       </div>
       <ion-item>
-        <ion-button  expand="block" >
+        <ion-button  expand="block" type="button" [routerLink]="'/cuerpo'" >
           Escoger parte del cuerpo
         </ion-button>
       </ion-item>
-      <ion-item id="login-input1">
+      <ion-item id="login-input1" >
         <ion-label>
           Parte del cuerpo
         </ion-label>
@@ -87,7 +87,7 @@
 </ion-content>
 <ion-footer>
   <div class="center" style="text-align: center;">
-    <ion-button type="submit" expand="block" [disabled]="!registro.valid">
+    <ion-button type="submit" expand="block" [routerLink]="'/consultas'">
       Crear consulta
     </ion-button>
   </div>

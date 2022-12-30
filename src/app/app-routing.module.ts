@@ -8,10 +8,6 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'folder/:id',
-    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
-  },
-  {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
   },
@@ -41,7 +37,7 @@ const routes: Routes = [
   },
   {
     path: 'consultas',
-    loadChildren: () => import('./pages/movil/consultas/consultas.module').then( m => m.ConsultasPageModule)
+    loadChildren: () => import('./pages/consultas/consultas.module').then( m => m.ConsultasPageModule)
   },
   {
     path: 'resultado-consulta',
@@ -49,11 +45,27 @@ const routes: Routes = [
   },
   {
     path: 'detalle-consulta',
-    loadChildren: () => import('./pages/movil/detalle-consulta/detalle-consulta.module').then( m => m.DetalleConsultaPageModule)
+    loadChildren: () => import('./pages/detalle-consulta/detalle-consulta.module').then( m => m.DetalleConsultaPageModule)
   },
   {
     path: 'notificaciones',
     loadChildren: () => import('./pages/movil/notificaciones/notificaciones.module').then( m => m.NotificacionesPageModule)
+  },
+  {
+    path: 'registro-medico',
+    loadChildren: () => import('./pages/web/registro-medico/registro-medico.module').then( m => m.RegistroMedicoPageModule)
+  },
+  {
+    path: 'casos-medicos',
+    loadChildren: () => import('./pages/web/casos-medicos/casos-medicos.module').then( m => m.CasosMedicosPageModule)
+  },
+  {
+    path: 'historias-clinicas',
+    loadChildren: () => import('./pages/web/historias-clinicas/historias-clinicas.module').then( m => m.HistoriasClinicasPageModule)
+  },
+  {
+    path: 'reportes',
+    loadChildren: () => import('./pages/web/reportes/reportes.module').then( m => m.ReportesPageModule)
   }
 ];
 

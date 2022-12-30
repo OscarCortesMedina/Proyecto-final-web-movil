@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppService } from 'src/app/config/app.service';
 
 @Component({
   selector: 'app-consultas',
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConsultasPage implements OnInit {
 
-  constructor() { }
+  isPhone = false;
+  constructor(private appService:AppService) {
+    this.isPhone = this.appService.isPhone;
+   }
 
   ngOnInit() {
   }
