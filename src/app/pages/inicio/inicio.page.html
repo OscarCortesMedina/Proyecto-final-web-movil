@@ -1,6 +1,6 @@
 <ion-header >
+  <ion-title>Dermo App</ion-title>
   <ion-toolbar>
-    <ion-title  style="color: #fff!important;">Dermo App</ion-title>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
@@ -9,23 +9,21 @@
 
 <ion-content padding [fullscreen]="true">
   <div [ngClass]="{'web-inicio':!isPhone}">
-
-  
   <ion-header collapse="condense" >
     <ion-toolbar >
-      <ion-title style="padding-inline:0px;text-align: center;font-size:x-large;" >Bienvenido a Dermo App</ion-title>
+      <ion-title class="inicio-title title" >Bienvenido a Dermo App</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <div id="container" style="padding-inline:0px;text-align: center;">
+  <div id="container" class="title">
     <strong class="capitalize">Nombre de Sujeto de prueba</strong>
   </div>
 
   <br>
-  <div id="explicacion" style="text-align:center;">
+  <div id="explicacion" class="center">
     <strong class="capitalize">Explicación de dermo app</strong>
   </div>
-  <div style="padding: 20px ;text-align:justify;">
+  <div class="inicio-description">
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
   </div>
   <div class="spacer" style="width:300px;height:51px;" id="login-spacer2"></div>
