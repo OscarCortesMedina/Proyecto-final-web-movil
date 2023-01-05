@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { AppService } from 'src/app/config/app.service';
 
 @Component({
   selector: 'app-crear-consulta',
@@ -16,7 +17,8 @@ export class CrearConsultaPage implements OnInit {
 		private fb: FormBuilder,
 		private alertController: AlertController,
 		private router: Router,
-		private loadingController: LoadingController
+		private loadingController: LoadingController,
+		public app: AppService 
 	) {
     this.registro = this.fb.group({
 			email: ['Test@test.com', [Validators.required, Validators.email]],
