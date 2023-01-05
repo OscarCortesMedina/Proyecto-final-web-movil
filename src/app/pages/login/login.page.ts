@@ -4,6 +4,7 @@ import { AlertController, LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { AppService } from 'src/app/config/app.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,8 @@ export class LoginPage  {
 		private alertController: AlertController,
 		private router: Router,
 		private loadingController: LoadingController,
-		private appService: AppService
+		private appService: AppService,
+		private authService: AuthService
 	) {
     this.credentials = this.fb.group({
 			email: ['Test@test.com', [Validators.required, Validators.email]],
@@ -31,24 +33,22 @@ export class LoginPage  {
 
 	async login() {
 		const loading = await this.loadingController.create();
-		//await loading.present();
-		this.router.navigateByUrl('/inicio', { replaceUrl: true });
-		/*this.authService.login(this.credentials.value).subscribe(
+		await loading.present();
+		this.authService.login(this.credentials.value).subscribe(
 			async (res) => {
 				await loading.dismiss();
-				this.router.navigateByUrl('/tabs', { replaceUrl: true });
+				this.router.navigateByUrl('/inicio', { replaceUrl: true });
 			},
 			async (res) => {
 				await loading.dismiss();
 				const alert = await this.alertController.create({
-					header: 'Login failed',
+					header: 'Login fallido',
 					message: res.error.error,
-					buttons: ['OK']
+					buttons: ['Aceptar']
 				});
-
 				await alert.present();
 			}
-		);*/
+		);
 	}
 
 	get email() {
