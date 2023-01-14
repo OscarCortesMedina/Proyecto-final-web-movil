@@ -11,3 +11,19 @@
 .form-item {
     width: 100%;
 }
+
+.form-title {
+    padding-left: 20px;
+}
+
+.form-error {
+    padding-left: 20px;
+    color: red;
+    font-size: small;
+}
+
+ion-select::part(placeholder),
+ion-select::part(text) {
+    white-space: break-spaces!important;
+}
+

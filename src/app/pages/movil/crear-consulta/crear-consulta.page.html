@@ -14,75 +14,88 @@
   <div class="crear-consulta-info">
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
   </div>
-	<form (ngSubmit)="registrarse()" [formGroup]="registro">
-		<div class="input-group">
-      <div>
+	<form (ngSubmit)="crearConsulta()" [formGroup]="consulta">
+     
+        <h2 class="form-title">Descripción de la lesión</h2>
         <ion-item>
-          <ion-label class="question-label">Tipos de lesión</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-select placeholder="Seleccione su tipo de lesión" class="form-item">
-            <ion-select-option *ngFor="let tipoDeLeasion of app.tiposDeLesion" [value]="tipoDeLeasion.id">
+          <ion-label class="question-label">Tipos de lesión:</ion-label>
+          <ion-select formControlName="tipoLesion" placeholder="Seleccione su tipo de lesión" class="form-item">
+            <ion-select-option text-wrap value="42" *ngFor="let tipoDeLeasion of app.tiposDeLesion" [value]="tipoDeLeasion.id">
               {{tipoDeLeasion.value}}</ion-select-option>
           </ion-select>
         </ion-item>
-      </div>
-      <div>
-        <ion-item >
-          <ion-label class="question-label">Forma lesión</ion-label>
-        </ion-item>
+        <div *ngIf="(tipoLesion?.dirty || tipoLesion?.touched)" class="form-error">
+          <span *ngIf="tipoLesion?.errors?.['required']">Campo requerido</span>
+        </div>
+
         <ion-item>
-          <ion-select placeholder="Seleccione la forma de la lesión" class="form-item">
+          <ion-label class="question-label">Forma lesión</ion-label>
+          <ion-select formControlName="formaLesion" placeholder="Seleccione la forma de la lesión" class="form-item">
             <ion-select-option *ngFor="let forma of app.formas" [value]="forma.id">
               {{forma.value}}</ion-select-option>
           </ion-select>
         </ion-item>
-      </div>
-      <div>
+        <div *ngIf="(formaLesion?.dirty || formaLesion?.touched)" class="form-error">
+          <span *ngIf="formaLesion?.errors?.['required']">Campo requerido</span>
+        </div>
+
         <ion-item>
           <ion-label class="question-label">Número de lesiones</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-select placeholder="Seleccione la cantidad de lesiones" class="form-item">
+          <ion-select formControlName="numeroLesiones" placeholder="Seleccione la cantidad de lesiones" class="form-item">
             <ion-select-option *ngFor="let numeroLesion of app.numeroDeLesiones" [value]="numeroLesion.id">
               {{numeroLesion.value}}</ion-select-option>
           </ion-select>
         </ion-item>
-      </div>
-      <div>
+        <div *ngIf="(numeroLesiones?.dirty || numeroLesiones?.touched)" class="form-error">
+          <span *ngIf="numeroLesiones?.errors?.['required']">Campo requerido</span>
+        </div>
+
         <ion-item>
           <ion-label class="question-label">Distribución</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-select placeholder="Seleccione la distribución de la lesión" class="form-item">
+          <ion-select formControlName="distribucion" placeholder="Seleccione la distribución de la lesión" class="form-item">
             <ion-select-option *ngFor="let distribucion of app.distribucion" [value]="distribucion.id">
               {{distribucion.value}}</ion-select-option>
           </ion-select>
         </ion-item>
-      </div>
-      <ion-item>
-        <ion-button  expand="block" type="button" [routerLink]="'/cuerpo'" >
-          Escoger parte del cuerpo
+        <div *ngIf="(distribucion?.dirty || distribucion?.touched)" class="form-error">
+          <span *ngIf="distribucion?.errors?.['required']">Campo requerido</span>
+        </div>
+
+        <div *ngIf="parteDelCuerpo?.invalid">
+          <h2 class="form-title">Parte del cuerpo</h2>
+      <ion-item >
+        <ion-button class="form-item"  expand="block" type="button" [routerLink]="'/cuerpo'" >
+          Seleccionar parte del cuerpo
         </ion-button>
       </ion-item>
-      <ion-item id="login-input1" >
+
+        </div>
+      
+        <div *ngIf="!parteDelCuerpo?.invalid">
+          <ion-item>
         <ion-label>
-          Parte del cuerpo
+          Parte del cuerpo:
         </ion-label>
-        <ion-input [disabled]="true" type="email" placeholder=""></ion-input>
+        <ion-input [disabled]="true" type="tipoLesion" placeholder="" formControlName="parteDelCuerpo"></ion-input>
       </ion-item>
+        </div>
+        <div *ngIf="(parteDelCuerpo?.dirty || parteDelCuerpo?.touched )" class="form-error">
+          <span *ngIf="parteDelCuerpo?.errors?.['required']">Campo requerido</span>
+        </div>
+      
+
+      <h2 class="form-title">Evidencia</h2>
       <ion-item>
-        <ion-button  expand="block" >
+        <ion-button expand="block" class="form-item">
           Agregar evidencia
         </ion-button>
       </ion-item>
-		</div>
  
 	</form>
 </ion-content>
 <ion-footer>
   <div class="center" >
-    <ion-button type="submit" expand="block" [routerLink]="'/consultas'">
+    <ion-button (click)="crearConsulta()" expand="block" >
       Crear consulta
     </ion-button>
   </div>
