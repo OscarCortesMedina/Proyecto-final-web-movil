@@ -64,7 +64,7 @@
         <div *ngIf="parteDelCuerpo?.invalid">
           <h2 class="form-title">Parte del cuerpo</h2>
       <ion-item >
-        <ion-button class="form-item"  expand="block" type="button" [routerLink]="'/cuerpo'" >
+        <ion-button class="form-item"  expand="block" type="button" (click)="escogerParteDelCuerpo()">
           Seleccionar parte del cuerpo
         </ion-button>
       </ion-item>

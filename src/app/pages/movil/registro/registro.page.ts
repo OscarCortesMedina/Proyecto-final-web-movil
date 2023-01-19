@@ -19,14 +19,14 @@ export class RegistroPage implements OnInit {
 		private loadingController: LoadingController
 	) {
     this.registro = this.fb.group({
-			email: ['Test@test.com', [Validators.required, Validators.email]],
-      nombre: ['Test test', [Validators.required, Validators.email]],
-      edad: [30, [Validators.required, Validators.email]],
-      residencia: ['Bogotá', [Validators.required, Validators.email]],
-      perfilDematologico: [false, [Validators.required, Validators.email]],
-	  password: ['123456', [Validators.required, Validators.minLength(6)]],
-      passwordConfirmation: ['123456', [Validators.required, Validators.minLength(6)]],
-	  terminosCondiciones: ['123456', [Validators.required, Validators.minLength(6)]]
+			email: ['', [Validators.required, Validators.email]],
+      		nombre: ['', [Validators.required, Validators.minLength(4),Validators.maxLength(60)]],
+      		edad: [null, [Validators.required, Validators.max(99),Validators.min(18)]],
+      		residencia: ['', [Validators.required, Validators.email]],
+      		perfilDematologico: [false, [Validators.required, Validators.requiredTrue]],
+	  		password: ['', [Validators.required, Validators.minLength(6)]],
+      		passwordConfirmation: ['123456', [Validators.required, Validators.minLength(6)]],
+	  		terminosCondiciones: ['123456', [Validators.required, Validators.minLength(6)]]
 		});
   }
 
@@ -36,8 +36,12 @@ export class RegistroPage implements OnInit {
 
 	async registrarse() {
 		const loading = await this.loadingController.create();
-		await loading.present();
+		//await loading.present();
 
+	}
+
+	get email() {
+		return this.registro.get('email');
 	}
 
 

@@ -1,12 +1,3 @@
-<ion-header >
-  <ion-toolbar >
-    <ion-title  style="color: #fff!important;">Dermo App</ion-title>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
   <ion-header  >
     <ion-toolbar >
@@ -17,8 +8,20 @@
   </ion-header>
   <ion-button expand="block" (click)="rotar()" >Rotar</ion-button>
   <div class="container">
-    <img [src]="cuerpo"/>
-    <button class="btn" (click)="rotar()" >Cabeza</button>
+    <img alt="Cuerpo" [src]="cuerpo"/>
+    <div>
+      <button class="btn-cabeza floating-btn" (click)="parteDelcuerpo('cabeza-frente')" >Cabeza</button>
+      <button class="btn-torso floating-btn" >Torso</button>
+      <button class="btn-brazo-iz floating-btn" >Brazo Izq</button>
+      <button class="btn-brazo-de floating-btn" >Brazo Der</button>
+      <button class="btn-mano-iz floating-btn" >Mano Izq</button>
+      <button class="btn-mano-de floating-btn" >Mano Der</button>
+      <button class="btn-pierna-iz floating-btn" >Pierna Izq</button>
+      <button class="btn-pierna-de floating-btn" >Pierna Der</button>
+      <button class="btn-pie-iz floating-btn" >Pie Izq</button>
+      <button class="btn-pie-de floating-btn" >Pie Der</button>
+    </div>
+    
   </div>
   
 

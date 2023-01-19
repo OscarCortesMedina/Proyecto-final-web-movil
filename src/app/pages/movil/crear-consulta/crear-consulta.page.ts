@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertController, LoadingController } from '@ionic/angular';
+import { AlertController, LoadingController, ModalController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AppService } from 'src/app/config/app.service';
 import { CrearConsultaService } from './crear-consulta.service';
+import { CuerpoPage } from '../cuerpo/cuerpo.page';
 
 @Component({
   selector: 'app-crear-consulta',
@@ -20,7 +21,8 @@ export class CrearConsultaPage implements OnInit {
 		private router: Router,
 		private loadingController: LoadingController,
 		public app: AppService,
-		private crearConsultaService:CrearConsultaService
+		private crearConsultaService:CrearConsultaService,
+		private modalCtrl: ModalController
 	) {
     this.consulta = this.fb.group({
 		tipoLesion: [null, [Validators.required]],
@@ -50,6 +52,21 @@ export class CrearConsultaPage implements OnInit {
 			this.crearConsultaService.crearConulta(this.consulta.value)
 			.subscribe(()=>loading.dismiss());
 		}
+	}
+
+	async escogerParteDelCuerpo(){
+		console.log("Escogiendo parte del cuerpo");
+		const modal = await this.modalCtrl.create({
+			component: CuerpoPage,
+		  });
+		  modal.present();
+	  
+		  const { data, role } = await modal.onWillDismiss();
+	  
+		  if (role === 'escoger') {
+			console.log("Parte del cuerpo ",data);
+		  }
+
 	}
 
 	get tipoLesion() {

@@ -11,6 +11,10 @@
         <ion-label>Correo</ion-label>
 				<ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
 			</ion-item>
+      <div *ngIf="(email?.dirty || email?.touched) && email?.errors" class="errors">
+				<span *ngIf="email?.errors?.['required']">El correo es requerido</span>
+				<span *ngIf="email?.errors?.['email']">El correo es inválido</span>
+			</div>
       <ion-item>
         <ion-label>Nombre</ion-label>
 				<ion-input type="text" placeholder="Nombre" formControlName="nombre"></ion-input>
