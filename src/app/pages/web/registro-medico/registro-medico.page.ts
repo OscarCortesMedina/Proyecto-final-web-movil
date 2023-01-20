@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
@@ -9,9 +9,11 @@ import { RegistroMedicoService } from './registro-medico.service';
   templateUrl: './registro-medico.page.html',
   styleUrls: ['./registro-medico.page.scss'],
 })
-export class RegistroMedicoPage implements OnInit {
+export class RegistroMedicoPage {
 
   registro: FormGroup;
+  @ViewChild('inputFiles') inputFiles:any;
+  file: any;
 
 	constructor(
 		private fb: FormBuilder,
@@ -26,7 +28,7 @@ export class RegistroMedicoPage implements OnInit {
 		email: ['', [Validators.required, Validators.email]],
       	nacionalidad: [null, [Validators.required]],
 		especialidad: [null, [Validators.required]],
-      	licenciaMedica: [false, [Validators.requiredTrue]],
+      	licenciaMedica: [null, [Validators.required]],
 	    password: ['', [Validators.required, Validators.minLength(6),Validators.maxLength(24)]],
       	passwordConfirmation: ['', [Validators.required, Validators.minLength(6),Validators.maxLength(24)]],
 		},
@@ -36,15 +38,7 @@ export class RegistroMedicoPage implements OnInit {
 		);
   }
 
-	ngOnInit() {
-
-		//this.registro.controls['licenciaMedica'].disable();
-		
-	}
-
 	async registrarse() {
-		const loading = await this.loadingController.create();
-		//await loading.present();
 		
 		if (this.registro.invalid){
 			Object.keys(this.registro.controls)
@@ -52,8 +46,8 @@ export class RegistroMedicoPage implements OnInit {
 				this.registro.get(control)?.markAllAsTouched();
 			}
 			)
-		}else {
-			const loading = await this.loadingController.create();
+		} else {
+		const loading = await this.loadingController.create();
 		await loading.present();
 		this.registroMedicoService.registro(this.registro.value).subscribe(
 			async (res) => {
@@ -71,8 +65,30 @@ export class RegistroMedicoPage implements OnInit {
 			}
 		);
 		}
-		
-		
+	}
+
+	async onFileChange($event:any){
+		const { files } = $event.target;
+		let message = 'Archivo ajuntado correctamente';
+		if (files.length > 1){
+			message = "Solo se puede adjuntar un archivo.";
+		} else if (files[0].size === 0) {
+			message = "Archivo corrupto o inválido";
+		} else if (files[0].type !== 'application/pdf') {
+			message = "El archivo tiene que tener extenxión PDF.";
+		} else if (files.length ==1){
+			this.file = files[0];
+		}
+		const alert = await this.alertController.create({
+			header: 'Agregar licencia medica',
+			message: message,
+			buttons: ['Aceptar']
+		});
+		await alert.present();
+	}
+
+	attachFiles() {
+		this.inputFiles.nativeElement.click();
 	}
 
 	get nombre() {

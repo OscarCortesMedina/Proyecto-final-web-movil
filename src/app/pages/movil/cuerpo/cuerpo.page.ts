@@ -40,7 +40,7 @@ export class CuerpoPage implements OnInit {
 
   test(){
     let bright = 1;
-    let time = 9;
+    let time = 6;
     let text = `  - type: turn_on
     device_id: 90da2a67ed3ebf771bbc0d0b7f162774
     entity_id: light.led_strip
@@ -52,7 +52,7 @@ export class CuerpoPage implements OnInit {
       seconds: ${time}
       milliseconds: 0\n`
       let finalText = text;
-      for (let i = 0;i<100;i++){
+      for (let i = 1;i<100;i++){
         bright++;
         finalText +=`  - type: turn_on
     device_id: 90da2a67ed3ebf771bbc0d0b7f162774

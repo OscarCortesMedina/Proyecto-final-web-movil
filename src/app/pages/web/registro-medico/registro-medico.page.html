@@ -51,14 +51,22 @@
 			</div>
 
       <ion-item>
-        <ion-checkbox [disabled]="true" formControlName="licenciaMedica" slot="start"></ion-checkbox>
-        <ion-label>Licenia Medica</ion-label>
+      <ion-label for="file">Licenia Medica</ion-label>
+        
+        <input 
+        #inputFiles
+        formControlName="licenciaMedica"
+        id="file" 
+        type="file"
+        name="pdf"
+        formControlName="licenciaMedica"
+        style="display:none;"
+        (change)="onFileChange($event)">
 
-        <ion-button type="button" expand="block" >
-          Agregar soporte medico
+        <ion-button [disabled]="file" (click)="attachFiles()" type="button" expand="block" >
+          {{ file ? file.name:'Agregar soporte'}}
         </ion-button>
       </ion-item>
-     <!-- <span>{{licenciaMedica?.errors | json}}</span>-->
       <div *ngIf="(licenciaMedica?.dirty || licenciaMedica?.touched) && licenciaMedica?.errors" class="form-error">
 				<span *ngIf="licenciaMedica?.errors?.['required']">La licencia medica es requerida</span>
 			</div>

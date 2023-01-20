@@ -5,63 +5,95 @@
 </ion-header>
 
 <ion-content>
-	<form (ngSubmit)="registrarse()" [formGroup]="registro">
+	<form (ngSubmit)="registrarse()" [formGroup]="registro" class="">
 		<div class="input-group">
 			<ion-item>
-        <ion-label>Correo</ion-label>
+        <ion-label>Email</ion-label>
 				<ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
 			</ion-item>
-      <div *ngIf="(email?.dirty || email?.touched) && email?.errors" class="errors">
+      <div *ngIf="(email?.dirty || email?.touched) && email?.errors" class="form-error">
 				<span *ngIf="email?.errors?.['required']">El correo es requerido</span>
 				<span *ngIf="email?.errors?.['email']">El correo es inválido</span>
 			</div>
+
       <ion-item>
         <ion-label>Nombre</ion-label>
 				<ion-input type="text" placeholder="Nombre" formControlName="nombre"></ion-input>
 			</ion-item>
+      <div *ngIf="(nombre?.dirty || nombre?.touched) && nombre?.errors" class="form-error">
+        <span *ngIf="nombre?.errors?.['required']">El nombre es requerido</span>
+				<span *ngIf="nombre?.errors?.['minlength']">El nombre necesita un mínimo de 4 caracteres</span>
+        <span *ngIf="nombre?.errors?.['maxlength']">El nombre necesita un máximo de 60 caracteres</span>
+			</div>
+
       <ion-item>
         <ion-label>Edad</ion-label>
 				<ion-input type="number" placeholder="Edad" formControlName="edad"></ion-input>
 			</ion-item>
+      <div *ngIf="(edad?.dirty || edad?.touched) && edad?.errors" class="form-error">
+        <span *ngIf="edad?.errors?.['required']">La edad es requerida</span>
+				<span *ngIf="edad?.errors?.['min']">La edad mínima es de 18 años.</span>
+        <span *ngIf="edad?.errors?.['max']">La edad máxima es de 99 años.</span>
+			</div>
+
       <ion-item>
         <ion-label>Lugar de residencia</ion-label>
 				<ion-input type="text" placeholder="Residencia" formControlName="residencia"></ion-input>
 			</ion-item>
+      <div *ngIf="(residencia?.dirty || residencia?.touched) && residencia?.errors" class="form-error">
+				<span *ngIf="residencia?.errors?.['required']">La residencia es requerida</span>
+			</div>
+
       <ion-button type="button" expand="block" [routerLink]="'/perfil-paso1'">
         Crear perfil dematológico
       </ion-button>
-      <ion-item>
-        <ion-checkbox slot="start" disabled="true"></ion-checkbox>
+
+      <ion-item *ngIf="perfilDermatologico">
+        <ion-checkbox slot="start" formControlName="perfilDematologico"></ion-checkbox>
         <ion-label>Pefil dematológico creado</ion-label>
       </ion-item>
+      <div *ngIf="(perfilDematologico?.dirty || perfilDematologico?.touched) && residencia?.errors" class="form-error">
+				<span *ngIf="perfilDematologico?.errors?.['required']">El  perfil dematológico es requerido</span>
+			</div>
+
 			<ion-item>
         <ion-label>Contraseña</ion-label>
 				<ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
 			</ion-item>
+      <div *ngIf="(password?.dirty || password?.touched) && password?.errors" class="form-error">
+				<span *ngIf="password?.errors?.['required']">La contraseña es requerida</span>
+        <span *ngIf="password?.errors?.['minlength']">La contraseña nombre necesita un mínimo de 4 caracteres</span>
+        <span *ngIf="password?.errors?.['maxlength']">La contraseña necesita un máximo de 60 caracteres</span>
+      </div>
+
       <ion-item>
         <ion-label>Confirmar Contraseña</ion-label>
 				<ion-input type="password" placeholder="Password" formControlName="passwordConfirmation"></ion-input>
 			</ion-item>
+      <div *ngIf="(passwordConfirmation?.dirty || passwordConfirmation?.touched) && passwordConfirmation?.errors" class="form-error">
+				<span *ngIf="passwordConfirmation?.errors?.['required']">La contraseña es requerida</span>
+        <span *ngIf="passwordConfirmation?.errors?.['minlength']">La contraseña necesita un mínimo de 4 caracteres</span>
+        <span *ngIf="passwordConfirmation?.errors?.['maxlength']">La contraseña necesita un máximo de 60 caracteres</span>
+        <span *ngIf="passwordConfirmation?.errors?.['confirmedValidator']">La contraseñas deben coincidir</span>
+      </div>
+
       <ion-item>
-        <ion-checkbox slot="start" ></ion-checkbox>
+        <ion-checkbox slot="start" formControlName="terminosCondiciones"></ion-checkbox>
         <ion-label>Aceptar terminos y condiciones.
           <a>Leer</a>
         </ion-label>
       </ion-item>
+      <div *ngIf="(terminosCondiciones?.dirty || terminosCondiciones?.touched) && terminosCondiciones?.errors" class="form-error">
+				<span *ngIf="terminosCondiciones?.errors?.['required']">Aceptar termino y condiciones es requerido</span>
+			</div>
 
 		</div>
-    <div class="spacer" style="width:300px;height:96px;" id="login-spacer1"></div>
-
-    
 	</form>
 </ion-content>
 <ion-footer>
-  <div class="center" style="text-align: center;">
-    <ion-button type="submit" expand="block" [routerLink]="'/login'">
+  <div class="center">
+    <ion-button type="submit" expand="block" (click)="registrarse()">
       Registrarse
     </ion-button>
-    <div class="spacer" style="width:300px;height:10px;" id="login-spacer1"></div>
-
-
   </div>
 </ion-footer>
