@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { PerfilPaso1Page } from './perfil-paso1.page';
+import { PerfilDermatologicoPage } from './perfil-dermatologico.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: PerfilPaso1Page
+    component: PerfilDermatologicoPage
   }
 ];
 

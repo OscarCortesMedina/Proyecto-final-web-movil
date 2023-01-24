@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AlertController, ModalController } from '@ionic/angular';
+import { AppService } from 'src/app/config/app.service';
+import { partesCuerpo } from 'src/app/interfaces/partes-cuerpo.interface';
 
 @Component({
   selector: 'app-cuerpo',
@@ -8,66 +11,91 @@ import { ModalController } from '@ionic/angular';
 })
 export class CuerpoPage implements OnInit {
 
-  cuerpo ='assets/images/frente.jpg';
+  cuerpo ='assets/images/frente.png';
+  image ='';
   rotacion = 'frente';
-  constructor(private modalCtrl: ModalController) {
+  cuerpoForm: FormGroup;
+  partes:any[] =[];
+  parteSeleccionada:{
+    id:number,
+    nombre:string,
+    tipo: number
+  } ={
+    id:0,
+    nombre:'',
+    tipo: 0
+  };
+  constructor(private modalCtrl: ModalController,
+    private fb: FormBuilder,
+    private app: AppService,
+    private alertController: AlertController) {
+    this.cuerpoForm = this.fb.group({
+			parteCuerpo:  [null,[Validators.required]]})
+      		
    }
 
   ngOnInit() {
-    this.test();
+    this.cuerpo=`assets/images/-${this.rotacion}.png`;    
   }
 
   rotar() {
-    if (this.cuerpo ==='assets/images/frente.jpg'){
-      this.cuerpo ='assets/images/espalda.jpg';
-    }else {
-      this.cuerpo ='assets/images/frente.jpg';
+    if (this.rotacion ==='frente'){
+      this.rotacion = 'espalda';
+      this.cuerpo =`assets/images/${this.image}-${this.rotacion}.png`;
+    } else {
+      this.rotacion = 'frente';
+      this.cuerpo =`assets/images/${this.image}-${this.rotacion}.png`;
     }
   }
 
   parteDelcuerpo(parte:string){
-    this.cuerpo = 'assets/images/'+parte+'.png';
+    console.log('Parte escogida',parte);
+    this.image=parte;
+    let parteCuerpo:string='';
+    let conversion = parte.split('-');
+
+    if (conversion.length>1){
+      parteCuerpo = conversion[0]+conversion[1][0].toUpperCase() 
+      + conversion[1].substring(1);
+    }else {
+      parteCuerpo = conversion[0];
+    }
+    parteCuerpo+= this.rotacion === 'frente' ? 'Frente':'Espalda';
+
+    this.partes = this.app?.partesCuerpo[parteCuerpo as keyof partesCuerpo];
+    this.cuerpo = `assets/images/${parte}-${this.rotacion}.png`;
   }
 
   cancel() {
     return this.modalCtrl.dismiss(null, 'cancel');
   }
 
-  escoger(parteDelCuepo:string) {
-
-    return this.modalCtrl.dismiss(parteDelCuepo, 'escoger');
+  async escoger() {
+    if (this.cuerpoForm.invalid && this.image!==''){
+			Object.keys(this.cuerpoForm.controls)
+			.forEach(control=>{
+				this.cuerpoForm.get(control)?.markAllAsTouched();
+			}
+			);
+      
+		}else if(this.image===''){
+      const alert = await this.alertController.create({
+        header: 'Escoger parte del cuerpo',
+        message: 'Debe escoger una parte del cuerpo para continuar',
+        buttons: ['Aceptar']
+      });
+      await alert.present();
+    } else {
+      this.modalCtrl.dismiss(this.cuerpoForm.value.parteCuerpo, 'escoger');
+    }
   }
 
-  test(){
-    let bright = 1;
-    let time = 6;
-    let text = `  - type: turn_on
-    device_id: 90da2a67ed3ebf771bbc0d0b7f162774
-    entity_id: light.led_strip
-    domain: light
-    brightness_pct: ${bright}
-  - delay:
-      hours: 0
-      minutes: 0
-      seconds: ${time}
-      milliseconds: 0\n`
-      let finalText = text;
-      for (let i = 1;i<100;i++){
-        bright++;
-        finalText +=`  - type: turn_on
-    device_id: 90da2a67ed3ebf771bbc0d0b7f162774
-    entity_id: light.led_strip
-    domain: light
-    brightness_pct: ${bright}
-  - delay:
-      hours: 0
-      minutes: 0
-      seconds: ${time}
-      milliseconds: 0\n`
-      }
-      console.log(finalText);
-  } 
+  get parteCuerpo(){
+    return this.cuerpoForm.get('parteCuerpo');
+  }
 
-
+  get parteEspecifica(){
+    return this.cuerpoForm.get('parteEspecifica');
+  }
 
 }

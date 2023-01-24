@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content>
-	<form (ngSubmit)="registrarse()" [formGroup]="registro" class="">
+	<form (ngSubmit)="registrarse()" [formGroup]="registro">
 		<div class="input-group">
 			<ion-item>
         <ion-label>Email</ion-label>
@@ -44,16 +44,16 @@
 				<span *ngIf="residencia?.errors?.['required']">La residencia es requerida</span>
 			</div>
 
-      <ion-button type="button" expand="block" [routerLink]="'/perfil-paso1'">
+      <ion-button *ngIf="!validacionPerfilDematologico?.value" type="button" expand="block" (click)="crearPerfilDermatologico()">
         Crear perfil dematológico
       </ion-button>
 
-      <ion-item *ngIf="perfilDermatologico">
-        <ion-checkbox slot="start" formControlName="perfilDematologico"></ion-checkbox>
+      <ion-item *ngIf="validacionPerfilDematologico?.value">
+        <ion-checkbox slot="start" formControlName="validacionPerfilDematologico"></ion-checkbox>
         <ion-label>Pefil dematológico creado</ion-label>
       </ion-item>
-      <div *ngIf="(perfilDematologico?.dirty || perfilDematologico?.touched) && residencia?.errors" class="form-error">
-				<span *ngIf="perfilDematologico?.errors?.['required']">El  perfil dematológico es requerido</span>
+      <div *ngIf="(validacionPerfilDematologico?.dirty || validacionPerfilDematologico?.touched) && residencia?.errors" class="form-error">
+				<span *ngIf="validacionPerfilDematologico?.errors?.['required']">El  perfil dematológico es requerido</span>
 			</div>
 
 			<ion-item>
@@ -92,8 +92,8 @@
 </ion-content>
 <ion-footer>
   <div class="center">
-    <ion-button type="submit" expand="block" (click)="registrarse()">
-      Registrarse
-    </ion-button>
+      <ion-button type="submit" expand="block" (click)="registrarse()">
+        Registrarse
+      </ion-button>
   </div>
 </ion-footer>

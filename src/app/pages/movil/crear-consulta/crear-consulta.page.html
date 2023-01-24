@@ -20,7 +20,7 @@
         <ion-item>
           <ion-label class="question-label">Tipos de lesión:</ion-label>
           <ion-select formControlName="tipoLesion" placeholder="Seleccione su tipo de lesión" class="form-item">
-            <ion-select-option text-wrap value="42" *ngFor="let tipoDeLeasion of app.tiposDeLesion" [value]="tipoDeLeasion.id">
+            <ion-select-option text-wrap value="42" *ngFor="let tipoDeLeasion of app.consulta.tiposDeLesion" [value]="tipoDeLeasion.id">
               {{tipoDeLeasion.value}}</ion-select-option>
           </ion-select>
         </ion-item>
@@ -31,7 +31,7 @@
         <ion-item>
           <ion-label class="question-label">Forma lesión</ion-label>
           <ion-select formControlName="formaLesion" placeholder="Seleccione la forma de la lesión" class="form-item">
-            <ion-select-option *ngFor="let forma of app.formas" [value]="forma.id">
+            <ion-select-option *ngFor="let forma of app.consulta.formas" [value]="forma.id">
               {{forma.value}}</ion-select-option>
           </ion-select>
         </ion-item>
@@ -42,7 +42,7 @@
         <ion-item>
           <ion-label class="question-label">Número de lesiones</ion-label>
           <ion-select formControlName="numeroLesiones" placeholder="Seleccione la cantidad de lesiones" class="form-item">
-            <ion-select-option *ngFor="let numeroLesion of app.numeroDeLesiones" [value]="numeroLesion.id">
+            <ion-select-option *ngFor="let numeroLesion of app.consulta.numeroDeLesiones" [value]="numeroLesion.id">
               {{numeroLesion.value}}</ion-select-option>
           </ion-select>
         </ion-item>
@@ -53,7 +53,7 @@
         <ion-item>
           <ion-label class="question-label">Distribución</ion-label>
           <ion-select formControlName="distribucion" placeholder="Seleccione la distribución de la lesión" class="form-item">
-            <ion-select-option *ngFor="let distribucion of app.distribucion" [value]="distribucion.id">
+            <ion-select-option *ngFor="let distribucion of app.consulta.distribucion" [value]="distribucion.id">
               {{distribucion.value}}</ion-select-option>
           </ion-select>
         </ion-item>

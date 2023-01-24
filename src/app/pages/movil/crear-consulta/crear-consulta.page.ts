@@ -30,6 +30,7 @@ export class CrearConsultaPage implements OnInit {
 		numeroLesiones: [null, [Validators.required]],
 		distribucion: [null, [Validators.required]],
 		parteDelCuerpo: ['',[Validators.required]],
+		parteDelCuerpoId: [null],
 		evidencias:[]
 		});
   }
@@ -65,6 +66,8 @@ export class CrearConsultaPage implements OnInit {
 	  
 		  if (role === 'escoger') {
 			console.log("Parte del cuerpo ",data);
+			this.consulta.get('parteDelCuerpo')?.setValue(data.nombre)
+			this.consulta.get('parteDelCuerpoId')?.setValue(data.id)
 		  }
 
 	}

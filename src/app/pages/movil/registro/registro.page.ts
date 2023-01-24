@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertController, LoadingController } from '@ionic/angular';
+import { AbstractControlOptions, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AlertController, LoadingController, ModalController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { RegistroService } from './registro.service';
+import { PerfilDermatologicoPage } from '../perfil-dermatologico/perfil-dermatologico.page';
 
 @Component({
   selector: 'app-registro',
@@ -12,31 +13,47 @@ import { RegistroService } from './registro.service';
 export class RegistroPage implements OnInit {
 
   registro: FormGroup;
-  perfilDermatologico:any = null;
-
 	constructor(
 		private fb: FormBuilder,
 		private alertController: AlertController,
 		private router: Router,
 		private loadingController: LoadingController,
-		private registroService:RegistroService
+		private registroService:RegistroService,
+		private modalCtrl: ModalController
 	) {
     this.registro = this.fb.group({
-			email: ['', [Validators.required, Validators.email]],
-      		nombre: ['', [Validators.required, Validators.minLength(4),Validators.maxLength(60)]],
-      		edad: [null, [Validators.required, Validators.max(99),Validators.min(18)]],
-      		residencia: ['', [Validators.required]],
-      		perfilDematologico: [false, [Validators.requiredTrue]],
-	  		password: ['', [Validators.required, Validators.minLength(6),Validators.maxLength(24)]],
+			email:  ['',[Validators.required, Validators.email]],
+      		nombre: ['',[Validators.required, Validators.minLength(4),Validators.maxLength(60)]],
+      		edad: [null,[Validators.required, Validators.max(99),Validators.min(18)]],
+      		residencia: ['',[Validators.required]],
+      		validacionPerfilDematologico: [false, [Validators.requiredTrue]],
+			perfilDematologico: [null],
+	  		password: ['',[Validators.required, Validators.minLength(6),Validators.maxLength(24)]],
       		passwordConfirmation: ['', [Validators.required, Validators.minLength(6),Validators.maxLength(24)]],
-	  		terminosCondiciones: [false, [Validators.requiredTrue]]
-		},
-		{
-		  validator: this.confirmedValidator('password', 'passwordConfirmation'),
-		});
+	  		terminosCondiciones: [false,[Validators.requiredTrue]]
+		},{
+			validators: this.confirmedValidator('password', 'passwordConfirmation'),
+		  })
   }
 
 	ngOnInit() {
+
+	}
+
+	async crearPerfilDermatologico(){
+		const modal = await this.modalCtrl.create({
+			component: PerfilDermatologicoPage,
+		  });
+		  modal.present();
+	  
+		  const { data, role } = await modal.onWillDismiss();
+	  
+		  if (role === 'escoger') {
+			this.registro.get('validacionPerfilDematologico')?.setValue(true);
+			this.registro.get('validacionPerfilDematologico')?.disable();
+			this.registro.get('perfilDematologico')?.setValue(data);
+		  }
+
 	}
 
 	async registrarse() {
@@ -46,7 +63,7 @@ export class RegistroPage implements OnInit {
 				this.registro.get(control)?.markAllAsTouched();
 			}
 			);
-			if (this.perfilDermatologico == null){
+			if (this.registro.get('perfilDematologico')?.value == null){
 				const alert = await this.alertController.create({
 					header: 'Registro',
 					message: "Debe crear un perfil dermatológico para continuar.",
@@ -90,6 +107,10 @@ export class RegistroPage implements OnInit {
 
 	get residencia() {
 		return this.registro.get('residencia');
+	}
+
+	get validacionPerfilDematologico() {
+		return this.registro.get('validacionPerfilDematologico');
 	}
 
 	get perfilDematologico() {

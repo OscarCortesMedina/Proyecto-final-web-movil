@@ -16,8 +16,8 @@ const routes: Routes = [
     loadChildren: () => import('./pages/movil/registro/registro.module').then( m => m.RegistroPageModule)
   },
   {
-    path: 'perfil-paso1',
-    loadChildren: () => import('./pages/movil/perfil-paso1/perfil-paso1.module').then( m => m.PerfilPaso1PageModule)
+    path: 'perfil-dermatologico',
+    loadChildren: () => import('./pages/movil/perfil-dermatologico/perfil-dermatologico.module').then( m => m.PerfilDermatologicoModule)
   },
   {
     path: 'inicio',
