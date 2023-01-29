@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content>
-	<form (ngSubmit)="verificar()" [formGroup]="perfilDermatologico">
+	<form id="perfil-from" (ngSubmit)="verificar()" [formGroup]="perfilDermatologico">
 		<div class="input-group">
       <div>
         <h3 class="question-title">Genético (características físicas)</h3>
@@ -165,7 +165,7 @@
 
 <ion-footer>
   <div class="center">
-      <ion-button type="submit" (click)="verificar()" expand="block">
+      <ion-button id="crear-perfil-button" type="submit" (click)="verificar()" expand="block">
         Crear perfil dermatológico
       </ion-button>
   </div>

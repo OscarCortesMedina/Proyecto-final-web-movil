@@ -64,7 +64,7 @@
         <div *ngIf="parteDelCuerpo?.invalid">
           <h2 class="form-title">Parte del cuerpo</h2>
       <ion-item >
-        <ion-button class="form-item"  expand="block" type="button" (click)="escogerParteDelCuerpo()">
+        <ion-button id="parte-cuerpo-button" class="form-item"  expand="block" type="button" (click)="escogerParteDelCuerpo()">
           Seleccionar parte del cuerpo
         </ion-button>
       </ion-item>
@@ -95,7 +95,7 @@
 </ion-content>
 <ion-footer>
   <div class="center" >
-    <ion-button (click)="crearConsulta()" expand="block" >
+    <ion-button id="crear-consulta-button" (click)="crearConsulta()" expand="block" >
       Crear consulta
     </ion-button>
   </div>

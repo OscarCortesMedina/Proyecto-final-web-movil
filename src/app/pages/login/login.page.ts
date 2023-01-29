@@ -15,6 +15,7 @@ export class LoginPage  {
 
   credentials: FormGroup;
   isPhone = environment.phone;
+  registerPage ='';
 	constructor(
 		private fb: FormBuilder,
 		private alertController: AlertController,
@@ -24,31 +25,42 @@ export class LoginPage  {
 		private authService: AuthService
 	) {
     this.credentials = this.fb.group({
-			email: ['Test@test.com', [Validators.required, Validators.email]],
-			password: ['123456', [Validators.required, Validators.minLength(6)]]
+			email: [null, [Validators.required, Validators.email]],
+			password: [null, [Validators.required, Validators.minLength(6),Validators.maxLength(24)]]
 		});
 		this.isPhone=this.appService.isPhone;
+		this.registerPage = this.isPhone ?'/registro': '/registro-medico'
   }
 
 
 	async login() {
-		const loading = await this.loadingController.create();
-		await loading.present();
-		this.authService.login(this.credentials.value).subscribe(
-			async (res) => {
-				await loading.dismiss();
-				this.router.navigateByUrl('/inicio', { replaceUrl: true });
-			},
-			async (res) => {
-				await loading.dismiss();
-				const alert = await this.alertController.create({
-					header: 'Login fallido',
-					message: res.error.error,
-					buttons: ['Aceptar']
-				});
-				await alert.present();
+		if (this.credentials.invalid){
+			Object.keys(this.credentials.controls)
+			.forEach(control=>{
+				this.credentials.get(control)?.markAllAsTouched();
 			}
-		);
+			);
+      
+		}else {
+			const loading = await this.loadingController.create();
+			await loading.present();
+			this.authService.login(this.credentials.value).subscribe({
+				next: async (res) => {
+					await loading.dismiss();
+					this.router.navigateByUrl('/inicio', { replaceUrl: true });
+				},
+				error:async (res) => {
+					await loading.dismiss();
+					const alert = await this.alertController.create({
+						header: 'Login fallido',
+						message: res.error.error,
+						buttons: ['Aceptar']
+					});
+					await alert.present();
+				}}
+			);
+		}
+		
 	}
 
 	get email() {

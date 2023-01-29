@@ -39,7 +39,7 @@
       
       <ion-item>
         <ion-label>Especialidad</ion-label>
-        <ion-item>
+        <ion-item >
           <ion-select formControlName="especialidad"  placeholder="Seleccione especialidad" >
             <ion-select-option *ngFor="let especialidad of especialidades" [value]="especialidad.id">
               {{especialidad.value}}</ion-select-option>
@@ -96,7 +96,7 @@
 		</div>
 
     <div class="center boton-registro" >
-      <ion-button type="submit" expand="block">
+      <ion-button id="register-button" type="submit" expand="block">
         Registrarse
       </ion-button>  
     </div>

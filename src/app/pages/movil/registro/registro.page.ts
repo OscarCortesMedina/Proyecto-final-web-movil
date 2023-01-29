@@ -25,7 +25,7 @@ export class RegistroPage implements OnInit {
 			email:  ['',[Validators.required, Validators.email]],
       		nombre: ['',[Validators.required, Validators.minLength(4),Validators.maxLength(60)]],
       		edad: [null,[Validators.required, Validators.max(99),Validators.min(18)]],
-      		residencia: ['',[Validators.required]],
+      		residencia: ['',[Validators.required,Validators.minLength(4),Validators.maxLength(20)]],
       		validacionPerfilDematologico: [false, [Validators.requiredTrue]],
 			perfilDematologico: [null],
 	  		password: ['',[Validators.required, Validators.minLength(6),Validators.maxLength(24)]],

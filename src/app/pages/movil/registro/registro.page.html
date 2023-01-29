@@ -42,9 +42,11 @@
 			</ion-item>
       <div *ngIf="(residencia?.dirty || residencia?.touched) && residencia?.errors" class="form-error">
 				<span *ngIf="residencia?.errors?.['required']">La residencia es requerida</span>
-			</div>
+        <span *ngIf="residencia?.errors?.['minlength']">La residencia necesita un mínimo de 4 caracteres</span>
+        <span *ngIf="residencia?.errors?.['maxlength']">la residencia necesita un máximo de 20 caracteres</span>
+      </div>
 
-      <ion-button *ngIf="!validacionPerfilDematologico?.value" type="button" expand="block" (click)="crearPerfilDermatologico()">
+      <ion-button id="perfil-dermatologico-button" *ngIf="!validacionPerfilDematologico?.value" type="button" expand="block" (click)="crearPerfilDermatologico()">
         Crear perfil dematológico
       </ion-button>
 
@@ -92,7 +94,7 @@
 </ion-content>
 <ion-footer>
   <div class="center">
-      <ion-button type="submit" expand="block" (click)="registrarse()">
+      <ion-button id="register-button" type="submit" expand="block" (click)="registrarse()">
         Registrarse
       </ion-button>
   </div>

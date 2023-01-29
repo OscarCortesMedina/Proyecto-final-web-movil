@@ -48,11 +48,37 @@ export class CrearConsultaPage implements OnInit {
 		}
 		)
 		if(this.consulta.valid){
-			const loading = await this.loadingController.create();
+			await this.crearConsultaTipoDiagnostico();
+		}
+	}
+
+	async crearConsultaTipoDiagnostico() {
+		const alert = await this.alertController.create({
+			header: 'Seleccione el tipo de diganóstico',
+			buttons: ['Cancelar','Aceptar'],
+			inputs: [
+			  {
+				label: 'Auto-generado',
+				type: 'radio',
+				value: 'auto',
+			  },
+			  {
+				label: 'Medico',
+				type: 'radio',
+				value: 'med',
+			  }
+			],
+		  });
+		  
+		  await alert.present();
+		  const { data } = await alert.onDidDismiss();
+		  console.log('Alert',data.values);
+		  const loading = await this.loadingController.create();
 			await loading.present();
 			this.crearConsultaService.crearConulta(this.consulta.value)
-			.subscribe(()=>loading.dismiss());
-		}
+			.subscribe(()=>{
+				this.router.navigateByUrl('/inicio', { replaceUrl: true });
+				loading.dismiss()});
 	}
 
 	async escogerParteDelCuerpo(){

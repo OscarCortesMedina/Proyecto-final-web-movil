@@ -4,7 +4,11 @@
 
 export const environment = {
   production: false,
-  phone: false
+  phone: false,
+  API: {
+    API_URL: 'http://localhost',
+    API_AUTH_ENDPOINT: '/auth',
+  }
 };
 
 /*

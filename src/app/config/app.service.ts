@@ -22,8 +22,9 @@ export class AppService {
   }]
 
   constructor(private platform:Platform) { 
-
-    if(this.platform.is("mobile") || this.platform.is('mobileweb')) {
+    console.log(window.navigator.userAgent);
+    if(this.platform.is("mobile") || this.platform.is('mobileweb')
+    || window.navigator.userAgent== 'Mobile') {
       this.isPhone = true;
     } else {
       this.isPhone = false;

@@ -10,7 +10,7 @@
   <div class="container">
     <img alt="Cuerpo" [src]="cuerpo"/>
     <div *ngIf="image===''">
-      <button class="btn-cabeza floating-btn" (click)="parteDelcuerpo('cabeza')">
+      <button id="cabeza-button" class="btn-cabeza floating-btn" (click)="parteDelcuerpo('cabeza')">
         Cabeza</button>
 
       <button class="btn-torso floating-btn" (click)="parteDelcuerpo('torso')">
@@ -66,7 +66,7 @@
 
 </ion-content>
 <ion-footer>
-  <ion-button type="button" expand="block" (click)="escoger()">
+  <ion-button id="seleccionar-parte-button" type="button" expand="block" (click)="escoger()">
     Escoger
   </ion-button>
 </ion-footer>
