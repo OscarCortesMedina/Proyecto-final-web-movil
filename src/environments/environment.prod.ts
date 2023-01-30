@@ -1,4 +1,7 @@
 export const environment = {
   production: true,
-  phone: false
+  API: {
+    API_URL: 'http://localhost',
+    API_AUTH_ENDPOINT: '/auth',
+  }
 };
