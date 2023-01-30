@@ -1,7 +1,0 @@
-{
-  "name": "DermoApp",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "angular"
-}
