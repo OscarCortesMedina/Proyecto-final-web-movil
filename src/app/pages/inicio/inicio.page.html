@@ -1,5 +1,5 @@
 <ion-header >
-  <ion-title>Dermo App</ion-title>
+  <ion-title *ngIf="isPhone">Dermo App</ion-title>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
@@ -28,7 +28,7 @@
   </div>
   <div class="spacer" style="width:300px;height:51px;" id="login-spacer2"></div>
 
-  <ion-button *ngIf="isPhone" expand="block" [routerLink]="'/crear-consulta'">Crear consulta</ion-button>
-  <ion-button *ngIf="!isPhone" expand="block" [routerLink]="'/casos-medicos'">Ver casos médicos</ion-button>
+  <ion-button id="crear-consulta-button" *ngIf="isPhone" expand="block" [routerLink]="'/crear-consulta'">Crear consulta</ion-button>
+  <ion-button id="casos-medicos-button"  *ngIf="!isPhone" expand="block" [routerLink]="'/casos-medicos'">Ver casos médicos</ion-button>
 </div>
 </ion-content>
