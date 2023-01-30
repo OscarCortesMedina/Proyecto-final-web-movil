@@ -14,7 +14,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginPage  {
 
   credentials: FormGroup;
-  isPhone = environment.phone;
+  isPhone = false;
   registerPage ='';
 	constructor(
 		private fb: FormBuilder,
