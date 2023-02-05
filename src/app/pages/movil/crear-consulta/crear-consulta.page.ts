@@ -30,8 +30,7 @@ export class CrearConsultaPage implements OnInit {
 		numeroLesiones: [null, [Validators.required]],
 		distribucion: [null, [Validators.required]],
 		parteDelCuerpo: ['',[Validators.required]],
-		parteDelCuerpoId: [null],
-		evidencias:[]
+		parteDelCuerpoId: [null]
 		});
   }
 

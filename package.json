@@ -27,6 +27,8 @@
     "@ionic/angular": "^6.1.9",
     "@ngx-translate/core": "^14.0.0",
     "@types/three": "^0.146.0",
+    "angular-cli-ghpages": "^1.0.5",
+    "gh-pages": "^5.0.0",
     "ionicons": "^6.0.3",
     "ngx-translate": "^0.0.1-security",
     "rxjs": "~7.5.0",
