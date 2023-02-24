@@ -59,7 +59,7 @@ jobs:
         with:
           name: app-dev
           path: |
-            ${{ github.workspace }}/packages/app/android/app/build/outputs/apk/debug/*.apk
+            ${{ github.workspace }}/android/app/build/outputs/apk/debug/*.apk
 
       - name: Upload release bundle
         if: ${{ github.ref == 'refs/heads/main' }}
@@ -67,4 +67,4 @@ jobs:
         with:
           name: app-release
           path: |
-            ${{ github.workspace }}/packages/app/android/app/build/outputs/apk/release/*.apk
+            ${{ github.workspace }}/android/app/build/outputs/apk/release/*.apk
