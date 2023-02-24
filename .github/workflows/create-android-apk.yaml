@@ -13,13 +13,6 @@ jobs:
       contents: write
 
     steps:
-      - name: Use coturiv/setup-ionic
-        uses: coturiv/setup-ionic@v1
-        with:
-          cordova-version: 8
-          install-java: false
-          install-pods: false
-
       - name: Checkout source
         uses: actions/checkout@v3
 
@@ -30,8 +23,9 @@ jobs:
           java-version: '11'
           cache: 'gradle'
 
-      - name: Install NPM Modules
+      - name: Install NPM Modules Angular And Ionic
         run: |
+          npm install -g @ionic/cli
           npm i -D -E @angular/cli
           npm install
 
@@ -42,12 +36,12 @@ jobs:
         run: ionic capacitor copy android
 
       - name: Build Android Dev APK
-        if: ${{ github.ref == 'refs/heads/develop' }}
+        #if: ${{ github.ref == 'refs/heads/develop' }}
         run: ionic capacitor build android
 
       - name: Build Android Release APK
-        if: ${{ github.ref == 'refs/heads/main' }}
-        run: ionic capacitor build android --release --prod
+        #if: ${{ github.ref == 'refs/heads/main' }}
+        run: ionic capacitor build android --prod
 
       - name: Generate the Android App Bundle
         working-directory: ./android/
