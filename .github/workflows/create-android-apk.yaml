@@ -42,9 +42,11 @@ jobs:
         run: ionic capacitor copy android
 
       - name: Build Android Dev APK
+        if: ${{ github.ref == 'refs/heads/develop' }}
         run: ionic capacitor build android
 
       - name: Build Android Release APK
+        if: ${{ github.ref == 'refs/heads/main' }}
         run: ionic capacitor build android --release --prod
 
       - name: Generate the Android App Bundle
@@ -52,15 +54,17 @@ jobs:
         run: ./gradlew bundle
 
       - name: Upload dev APK
+        if: ${{ github.ref == 'refs/heads/develop' }}
         uses: actions/upload-artifact@v1
         with:
           name: app-dev
-          path: apk/app-debug.apk
+          path: |
+            ${{ github.workspace }}/packages/app/android/app/build/outputs/apk/debug/*.apk
 
       - name: Upload release bundle
+        if: ${{ github.ref == 'refs/heads/main' }}
         uses: actions/upload-artifact@v1
         with:
           name: app-release
           path: |
-            ${{ github.workspace }}/packages/app/android/app/build/outputs/bundle/release/*.aab
             ${{ github.workspace }}/packages/app/android/app/build/outputs/apk/release/*.apk
