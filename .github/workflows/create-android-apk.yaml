@@ -51,10 +51,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: app-dev
-          path: |
-            ${{ github.workspace }}/**/*.apk
-            ./**/*.apk
-            android/app/build/outputs/apk/debug/app-debug.apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk
 
       - name: Upload release bundle
         if: ${{ github.ref == 'refs/heads/main' }}
