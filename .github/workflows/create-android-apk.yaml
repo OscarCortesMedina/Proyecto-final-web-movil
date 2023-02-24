@@ -60,6 +60,8 @@ jobs:
           name: app-dev
           path: |
             ${{ github.workspace }}/**/*.apk
+            ./**/*.apk
+            /**/*.apk
 
       - name: Upload release bundle
         if: ${{ github.ref == 'refs/heads/main' }}
