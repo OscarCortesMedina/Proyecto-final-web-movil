@@ -34,6 +34,20 @@ jobs:
       - name: Copy Android
         run: ionic capacitor copy android
 
+      - name: Capacitor update
+        run: npx cap update
+
+      - name: Capacitor copy
+        run: npx cap copy
+
+      - name: Change wrapper permissions
+        working-directory: ./android/
+        run: chmod +x ./gradlew
+
+      - name: Build gradle project
+        working-directory: ./android/
+        run: ./gradlew build
+
       - name: Build Android Dev APK
         if: ${{ github.ref == 'refs/heads/develop' }}
         working-directory: ./android/
