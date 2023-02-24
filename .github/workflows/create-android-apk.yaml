@@ -55,11 +55,11 @@ jobs:
 
       - name: Upload dev APK
         if: ${{ github.ref == 'refs/heads/develop' }}
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v3
         with:
           name: app-dev
           path: |
-            ${{ github.workspace }}/android/app/build/outputs/apk/debug/*.apk
+            ${{ github.workspace }}/**/*.apk
 
       - name: Upload release bundle
         if: ${{ github.ref == 'refs/heads/main' }}
